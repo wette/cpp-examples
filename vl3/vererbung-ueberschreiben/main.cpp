@@ -1,41 +1,21 @@
+#include "Mensch.hpp"
+#include "Student.hpp"
 #include <iostream>
-class RobotHW {
-    public:
-        /*virtual*/ void moveForwards(double meters) {
-            std::cout << "RobotHW::moveForwards()" << std::endl;
-        }
-};
-
-class Spot: public RobotHW {
-    public:
-        void moveForwards(double meters) {
-            std::cout << "Spot::moveForwards()" << std::endl;
-        }
-};
-
-class Atlas: public RobotHW {
-    public:
-        void moveForwards(double meters) {
-            std::cout << "Atlas::moveForwards()" << std::endl;
-        }
-};
-
-class Navigation {
-    public: 
-        void moveRobot(RobotHW &robot) {    //wichtig: call-by-reference damit nicht kopiert wird!
-            robot.moveForwards(5.0);
-        }
-};
-
 int main() {
-    Navigation nav;
+    Mensch max("Max Mustermann");
+    Student moritz("Moritz Mustermann", 12345678);
 
-    Spot spot;
-    Atlas atlas;
+    std::cout << max.getName() << std::endl;
+    
+    //studenten sind nur nummern (sorry... ;) 
+    //daher hat der Student Moritz den namen "Student 12345678"
+    std::cout << moritz.getName() << std::endl;
 
-    //Hier wird RobotHW::moveForwards() aufgerufen, wenn RobotHW::moveForwards() nicht virtual ist
-    nav.moveRobot(spot);
-    nav.moveRobot(atlas);
+    //betrachten wir den Mensch hinter dem Studenten, 
+    //so hat dieser den Namen "Moritz Mustermann"
+    Mensch &m2 = dynamic_cast<Mensch&>(moritz);
+    std::cout << m2.getName() << std::endl;
+    
 
     return 0;
 }
