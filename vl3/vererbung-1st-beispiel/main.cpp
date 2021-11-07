@@ -10,9 +10,10 @@ int main() {
 
     /*
     std::cout << "Typumwandlung von Moritz nach Mensch " << std::endl;
-    Mensch &m2 = moritz;
-    std::cout << m2.getName() << " matNr: " << m2.getMatrikelnummer() << std::endl;
+    Mensch &m2 = dynamic_cast<Mensch&>(moritz);
+    std::cout << m2.getName() << " matNr: " << m2.getMatrikelnummer() << std::endl; 
     */
+    
 
     return 0;
 }
