@@ -4,13 +4,17 @@ class A {
     public:
         //Standard Konstruktor
         A(int n) {
-            std::cout << "Standard-Konstruktor aufgerufen" << std::endl;
+            std::cout << "Standard-Konstruktor aufgerufen von " << this << std::endl;
             this->n = n;
         }
         //Copy-Konstruktor
         A(A &a){
-            std::cout << "Copy-Konstruktor aufgerufen" << std::endl;
+            std::cout << "Copy-Konstruktor aufgerufen. Kopiere " << &a << " nach " << this << std::endl;
             this->n = a.n;
+        }
+        //Destruktor
+        ~A() {
+            std::cout << "Destruktor aufgerufen von " << this << std::endl;
         }
         void setN(int n) {
             this->n = n;
@@ -33,6 +37,7 @@ class B {
 int main() {
     A a(10);
     B b;
+    std::cout << "a: " << a.getN() << std::endl;
 
     std::cout << "rufe funktionByValue auf" << std::endl;
     b.funktionByValue(a);
