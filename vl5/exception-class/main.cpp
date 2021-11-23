@@ -3,6 +3,7 @@
 
 #include<fstream>
 
+/* Klasse, die Statistiken einer Datei ermittelt */
 class FileStats{
     private:
         int numberOfLines;
@@ -28,7 +29,7 @@ int main() {
         try{
             FileStats fs(x);
             std::cout << "Anzahl Zeilen: " << fs.getNumberOfLines() << std::endl;
-        } catch(std::runtime_error e) {
+        } catch(std::runtime_error &e) {
             //fehlerbehandlung hier
             std::cout << "error: " << e.what() << std::endl;
             std::cout << "bitte erneut Dateiname eingeben" << std::endl;

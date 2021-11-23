@@ -26,7 +26,7 @@ int main() {
                 std::cout << a/b << std::endl;
             }
 
-        } catch(std::runtime_error e) {
+        } catch(std::runtime_error &e) {
             //fehlerbehandlung hier
             std::cout << "error: " << e.what() << std::endl;
             std::cout << "bitte erneut Radius eingeben" << std::endl;
