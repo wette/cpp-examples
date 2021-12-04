@@ -27,13 +27,13 @@ int main() {
     //erstellen eines neuen Threads, der func(2) ausführt.
     std::thread t(func, 2);
 
-    //ausführen von func(1) im "Main Thread"
+    //ausführen von func(1) im "Main Thread" - nun sollten func(2) und func(1) parallel ausgeführt werden!
     func(1);
 
-    //warten, bis t fertig ist ist.
+    //warten, bis auch t fertig ist ist.
     t.join();
 
-    //ausführen einer Funktion im Objektkontext in einem Thread
+    //ausführen einer Funktion im Objektkontext in einem Thread: wir wollen c.func(3) in einem neuen Thread aufrufen.
     myClass c;
     std::thread t2(&myClass::func, c, 3);   //ruft c.func(3) im Thread auf.
 
