@@ -6,7 +6,8 @@
 */
 
 #define ASIO_STANDALONE
-#include "../asio/asio/include/asio.hpp"
+#define ASIO_DISABLE_IOCP 1
+#include "asio.hpp"
 
 #include <ctime>
 #include <iostream>
@@ -14,7 +15,7 @@
 
 using asio::ip::tcp;
 
-/* Der Kürze halber hier ohne Fehlerbehandlung. Das machen wir im Unternehmen natürlich nicht!!! */
+/* Der Kürze halber hier mit minimaler Fehlerbehandlung. Das machen wir im Unternehmen natürlich nicht!!! */
 int main() {
 
     const std::string PORT = "12345";
@@ -30,11 +31,23 @@ int main() {
 
         std::string message = "Hello Server!";
 
-        asio::error_code ignored_error;
-        asio::write(socket, asio::buffer(message), ignored_error);  /* Daten über Socket senden */
+        asio::error_code error;
+        asio::write(socket, asio::buffer(message), error);  /* Daten über Socket senden */
+        if(error) {
+            throw new std::runtime_error(error.message());
+        }
 
-        char buffer[1024];
-        size_t len = socket.read_some(asio::buffer(buffer), ignored_error); /* Daten aus dem Socket lesen */
+        const int buflen = 1024;
+        char buffer[buflen];
+        for(int i = 0; i < buflen; i++) {
+            buffer[i] = 0;
+        }
+        size_t len = socket.read_some(asio::buffer(buffer), error); /* Daten aus dem Socket lesen */
+        if(error) {
+            throw new std::runtime_error(error.message());
+        }
+
+
         std::cout << buffer << std::endl;
 
         socket.close();                             /* verbindung beenden */
