@@ -1,6 +1,7 @@
 #pragma once
 
 #define ASIO_STANDALONE
+#define ASIO_DISABLE_IOCP 1
 #include "../../asio/asio/include/asio.hpp"
 #include<string>
 #include "Message.hpp"
