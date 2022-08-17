@@ -3,7 +3,7 @@
 
 class Mine {
 	private:
-		Kugelschreiber &meinKS;
+		Kugelschreiber *meinKS;
 		double fuellstand = 1.0;
 		double verbrauchProZeichen = 0.05;
 
@@ -23,7 +23,7 @@ class Mine {
 class Kugelschreiber {
 	private:
 		bool mineAusgefahren = false;
-		Mine meineMine = Mine();
+		Mine meineMine;
 
 	public:
 		bool knopfDruecken() {
