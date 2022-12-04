@@ -20,36 +20,37 @@ class Ship : public Transport{
 
 class LogisticsFactory {
     public: 
-        virtual std::unique_ptr<Transport> createTransport() = 0;
+        virtual std::shared_ptr<Transport> createTransport() = 0;
 };
 
 class TruckFactory: public LogisticsFactory {
     public:
-        std::unique_ptr<Transport> createTransport() {
-            return std::make_unique<Truck>();
+        std::shared_ptr<Transport> createTransport() {
+            return std::make_shared<Truck>();
         }
 };
 
 class ShipFactory: public LogisticsFactory {
     public:
-        std::unique_ptr<Transport> createTransport() {
-            return std::make_unique<Ship>();
+        std::shared_ptr<Transport> createTransport() {
+            return std::make_shared<Ship>();
         }
 };
 
 int main() {
-    std::unique_ptr<TruckFactory> tf = std::make_unique<TruckFactory>();
-    std::unique_ptr<ShipFactory> sf  = std::make_unique<ShipFactory>();;
-    std::unique_ptr<LogisticsFactory> f = std::move(tf);
+    std::shared_ptr<TruckFactory> tf = std::make_shared<TruckFactory>();
+    std::shared_ptr<ShipFactory> sf  = std::make_shared<ShipFactory>();
+    std::shared_ptr<LogisticsFactory> f = tf;
 
-    std::unique_ptr<Transport> t0 = f->createTransport();
-    std::unique_ptr<Transport> t1 = f->createTransport();
+    std::shared_ptr<Transport> t0 = f->createTransport();
+    std::shared_ptr<Transport> t1 = f->createTransport();
 
-    f = std::move(sf);
+    f = sf;
 
-    std::unique_ptr<Transport> t2 = f->createTransport();
+    std::shared_ptr<Transport> t2 = f->createTransport();
 
     t0->whoAmI();
     t1->whoAmI();
     t2->whoAmI();
 }
+
