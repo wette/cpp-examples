@@ -2,14 +2,12 @@
 #include <string>
 
 int main() {
-	Kugelschreiber meinKulli(2.0);
+	Kugelschreiber meinKulli;
 	meinKulli.schreiben("");
 	meinKulli.knopfDruecken();
 	meinKulli.schreiben("Ich schreibe etwas.");
 	meinKulli.schreiben("Tinte leer?");
 	meinKulli.knopfDruecken();
 	
-	Kugelschreiber ks2;
-	ks2 = ks2 + meinKulli;
-
+	return 0;
 }
